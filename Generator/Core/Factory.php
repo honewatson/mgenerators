@@ -22,10 +22,12 @@ class Generators_Generator_Core_Factory {
 	 * @param $args
 	 * @param $dependencies
 	 */
-	public function __construct($class, $args, $namespace, $Generators_Generator_Ini, $base_path) {
+	public function __construct($class, $args, $namespace, $generator_namespace, $Generators_Generator_Ini,
+$base_path) {
 		$this->class = $class;
 		$this->args = $args;
 		$this->namespace = $namespace;
+		$this->generator_namespace = $generator_namespace;
 		$this->Generators_Generator_Ini = $Generators_Generator_Ini;
 		$this->base_path = $base_path;
 	}
@@ -35,7 +37,7 @@ class Generators_Generator_Core_Factory {
 		$class_dependencies = $module_dependencies[$this->class];
 
 		$template = new $class_dependencies['template_factory']($class_dependencies['template_engine'],
-		$this->namespace, $this->base_path);
+		$this->generator_namespace, $this->base_path);
 		$class = new $this->class($this->args, $class_dependencies, $template, $this->namespace);
 		return $class;
 	}

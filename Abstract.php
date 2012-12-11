@@ -190,11 +190,27 @@ abstract class Generators_Abstract
         }
     }
 
+	public  $_namespace = null;
+	public function getNamespace() {
+		if($this->_namespace === null)     {
+			$name = explode("_",$this->getArg('name'));
+			array_pop($name);
+			$this->_namespace = implode("_", $name);
+		}
+		return $this->_namespace;
+	}
+	public $_generator_namespace = null;
+	public function getGeneratorNamespace() {
+		if($this->_generator_namespace === null)
+			$this->_generator_namespace  = str_replace('Generators_', '', get_called_class());
+		return $this->_generator_namespace;
+	}
 	public function getClass($Generators_Generator_Factory ='Generators_Generator_Core_Factory',
 	                         $Generators_Generator_Ini
 	= 'Generators_Generator_Core_Ini',
 	                         $Generators_Autoload = 'Generators_Autoload'){
-			$this->_namespace  = str_replace('Generators_', '', get_called_class());
+			//$this->_namespace  = str_replace('Generators_', '', get_called_class());
+
 			/**
 			 *  @var $class Generators_Generator_Abstract
 	         */
@@ -203,8 +219,9 @@ abstract class Generators_Abstract
 			$Class = new $Generators_Generator_Factory(
 				$class,
 				(object)$this->_args,
-				$this->_namespace,
-				new $Generators_Generator_Ini($this->_namespace,
+				$this->getNamespace(),
+				$this->getGeneratorNamespace(),
+				new $Generators_Generator_Ini($this->getGeneratorNamespace(),
 					$this->_getRootPath(),
 					$Generators_Autoload
 				),
