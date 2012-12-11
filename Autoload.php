@@ -24,4 +24,8 @@ class Generators_Autoload {
 		return str_replace('_', '/', $class_name);
 	}
 
+	public static function getBasePath(){
+		return static::$base_path;
+	}
+
 }

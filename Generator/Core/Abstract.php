@@ -18,6 +18,11 @@ abstract class Generators_Generator_Core_Abstract {
 	public $args;
 
 	/**
+	 * @var array
+	 */
+	public $class_cache = array();
+
+	/**
 	 * @param $args args parsed from command line
 	 * @param $inject an ini file with a list of classes to inject
 	 * @param $template a template factory for loading templates of a template engine
@@ -30,7 +35,16 @@ abstract class Generators_Generator_Core_Abstract {
 	}
 	public function load($class, $args=array()){
 		$class = $this->inject[$class];
-		return new $class($args);
+		if(sizeof($args))
+			return new $class($args);
+		else
+			return new $class;
+	}
+
+	public function fromCache($class, $args=array()){
+		if(!isset($this->class_cache[$class]))
+			$this->class_cache[$class] = $this->load($class, $args=array());
+		return $this->class_cache[$class];
 	}
 
 	public function getData(){
