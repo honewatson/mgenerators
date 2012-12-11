@@ -11,7 +11,7 @@ class Generators_Generator_Core_Ini
 	/**
 	 * @var string
 	 */
-	public $class;
+	public $namespace;
 
 	/**
 	 * @var string
@@ -24,8 +24,8 @@ class Generators_Generator_Core_Ini
 	public $Generators_Autoload;
 
 
-	public function __construct($class, $base_path, $Generators_Autoload) {
-		$this->class = $class;
+	public function __construct($namespace, $base_path, $Generators_Autoload) {
+		$this->namespace = $namespace;
 		$this->base_path = $base_path;
 		$this->Generators_Autoload = $Generators_Autoload;
 	}
@@ -35,7 +35,7 @@ class Generators_Generator_Core_Ini
 		 * var $autoload Generators_Autoload
 		 */
 		$autoload = $this->Generators_Autoload;
-		$file = $autoload::getFilePath($this->class).".ini";
+		$file = $autoload::getFilePath("Generators_{$this->namespace}_{$this->namespace}.ini");
 		return parse_ini_file($this->base_path."/".$file,true);
 	}
 

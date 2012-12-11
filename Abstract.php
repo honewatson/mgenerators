@@ -204,7 +204,7 @@ abstract class Generators_Abstract
 				$class,
 				(object)$this->_args,
 				$this->_namespace,
-				new $Generators_Generator_Ini($class,
+				new $Generators_Generator_Ini($this->_namespace,
 					$this->_getRootPath(),
 					$Generators_Autoload
 				),

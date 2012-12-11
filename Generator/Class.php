@@ -1,6 +1,6 @@
 <?php
 
-class Generators_Generator_Generator extends Generators_Generator_Core_Abstract {
+class Generators_Generator_Class extends Generators_Generator_Core_Abstract {
 
 	public function run()
 	{
