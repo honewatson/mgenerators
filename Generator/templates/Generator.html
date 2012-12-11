@@ -1,0 +1,31 @@
+<?php
+
+require_once 'Abstract.php';
+
+class Generators_{{  data.name  }} extends Generators_Generator
+{
+	/**
+	*
+	*  The run function gets a class of the class entered as --class in the command line
+	*/
+	/*
+	public function run(){
+		$this->getClass()->run();
+	}
+	*/
+	public function usageHelp(){
+        return <<<USAGE
+Usage:  php -f {{  data.name  }}.php -- [options]
+
+  --class <Class>                 Run Class
+
+  help                          This help
+
+  <indexer>     Comma separated indexer codes or value "all" for all indexers
+
+USAGE;
+	}
+}
+
+$shell = new Generators_{{  data.name  }}();
+$shell->run();

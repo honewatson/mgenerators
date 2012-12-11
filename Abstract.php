@@ -31,7 +31,12 @@
  * @package     Mage_Shell
  * @author      Magento Core Team <core@magentocommerce.com>
  */
-abstract class Mage_Shell_Abstract
+date_default_timezone_set('Australia/Melbourne');
+error_reporting(E_ALL | E_STRICT);
+ini_set('display_errors', 1);
+require_once 'Autoload.php';
+
+abstract class Generators_Abstract
 {
     /**
      * Is include Mage and initialize application
@@ -68,23 +73,38 @@ abstract class Mage_Shell_Abstract
      */
     protected $_args        = array();
 
+	protected $_color;
+
     /**
      * Initialize application and parse input parameters
      *
      */
     public function __construct()
     {
+
         if ($this->_includeMage) {
             require_once $this->_getRootPath() . 'app' . DIRECTORY_SEPARATOR . 'Mage.php';
             Mage::app($this->_appCode, $this->_appType);
         }
-
+	    $this->_autoload();
+	    $this->_loadH2o();
         $this->_applyPhpVariables();
         $this->_parseArgs();
         $this->_construct();
         $this->_validate();
         $this->_showHelp();
     }
+
+	protected function _loadH2o(){
+		include "./h2o-php/h2o.php";
+		//$h2o = new h2o('h2o-php/templates/generator/magento.php');
+
+	}
+
+	protected function _autoload(){
+		$autoload = new Generators_Autoload($this->_getRootPath());
+		$autoload->autoload();
+	}
 
     /**
      * Get Magento Root path (with last directory separator)
@@ -170,6 +190,29 @@ abstract class Mage_Shell_Abstract
         }
     }
 
+	public function getClass($Generators_Generator_Factory ='Generators_Generator_Factory', $Generators_Generator_Ini
+	= 'Generators_Generator_Ini',
+	                         $Generators_Autoload = 'Generators_Autoload', $templateFactory ='Generators_Generator_Template',
+$templateEngine = 'H2o'){
+			$this->_namespace  = str_replace('Generators_', '', get_called_class());
+			/**
+			 *  @var $class Generators_Generator_Abstract
+	         */
+			$class = $this->getArg('class');
+
+			$Class = new $Generators_Generator_Factory(
+				$class,
+				(object)$this->_args,
+				$this->_namespace,
+				new $Generators_Generator_Ini($class,
+					$this->_getRootPath(),
+					$Generators_Autoload
+				),
+				$this->_getRootPath()
+			);
+
+			return $Class->build();
+	}
     /**
      * Run script
      *
