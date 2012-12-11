@@ -35,8 +35,8 @@ class Generators_Generator_Core_Factory {
 		$class_dependencies = $module_dependencies[$this->class];
 
 		$template = new $class_dependencies['template_factory']($class_dependencies['template_engine'],
-			$this->namespace, $this->base_path);
-		$class = new $this->class($this->args, $class_dependencies, $template);
+		$this->namespace, $this->base_path);
+		$class = new $this->class($this->args, $class_dependencies, $template, $this->namespace);
 		return $class;
 	}
 }

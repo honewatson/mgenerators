@@ -1,6 +1,6 @@
 <?php
 
-class Generators_Generator_App extends Generators_Generator_Core_Abstract {
+class Generators_{{  data.namespace  }}_{{  data.classname }} extends {{  data.abstract  }} {
 
 	public function run()
 	{
@@ -14,7 +14,7 @@ class Generators_Generator_App extends Generators_Generator_Core_Abstract {
 		* Maybe do some data manipulation here
 		*/
 
-		$template =  "App.html";
+		$template =  "{{  data.template }}";
 
 		/** @var H2o */
 		$template = $this->template->build($template);

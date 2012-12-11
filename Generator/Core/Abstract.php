@@ -28,10 +28,11 @@ abstract class Generators_Generator_Core_Abstract {
 	 * @param $template a template factory for loading templates of a template engine
 	 */
 
-	public function __construct($args, $inject, $template){
+	public function __construct($args, $inject, $template, $namespace){
 		$this->args = $args;
 		$this->inject = $inject;
 		$this->template = $template;
+		$this->namespace = $namespace;
 	}
 	public function load($class, $args=array()){
 		$class = $this->inject[$class];
@@ -48,7 +49,13 @@ abstract class Generators_Generator_Core_Abstract {
 	}
 
 	public function getData(){
-		return array('data'=>$this->args);
+		$helper = $this->load('helper');
+		$data['abstract'] = 'Generators_Generator_Core_Abstract';
+		$data['classname'] = $helper->getClassName($this->args->name);
+		$data['namespace'] = $this->namespace;
+		$data['template'] =  "{$data['classname']}.html";
+		$final = array_merge($data, (array)$this->args);
+		return array('data'=>$final);
 	}
 
 	abstract public function run();
