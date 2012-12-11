@@ -1,6 +1,6 @@
 <?php
 
-abstract class Generators_Generator_Abstract {
+abstract class Generators_Generator_Core_Abstract {
 
 	/**
 	 * @var Generators_Generator_Templateh20

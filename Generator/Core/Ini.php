@@ -6,7 +6,7 @@
  * Time: 2:38 PM
  * To change this template use File | Settings | File Templates.
  */
-class Generators_Generator_Ini
+class Generators_Generator_Core_Ini
 {
 	/**
 	 * @var string

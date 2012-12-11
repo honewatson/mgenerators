@@ -190,10 +190,10 @@ abstract class Generators_Abstract
         }
     }
 
-	public function getClass($Generators_Generator_Factory ='Generators_Generator_Factory', $Generators_Generator_Ini
-	= 'Generators_Generator_Ini',
-	                         $Generators_Autoload = 'Generators_Autoload', $templateFactory ='Generators_Generator_Template',
-$templateEngine = 'H2o'){
+	public function getClass($Generators_Generator_Factory ='Generators_Generator_Core_Factory',
+	                         $Generators_Generator_Ini
+	= 'Generators_Generator_Core_Ini',
+	                         $Generators_Autoload = 'Generators_Autoload'){
 			$this->_namespace  = str_replace('Generators_', '', get_called_class());
 			/**
 			 *  @var $class Generators_Generator_Abstract

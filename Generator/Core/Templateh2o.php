@@ -6,7 +6,7 @@
  * Time: 4:40 PM
  * To change this template use File | Settings | File Templates.
  */
-class Generators_Generator_Templateh2o
+class Generators_Generator_Core_Templateh2o
 {
 	public $H2o;
 	public $namespace;

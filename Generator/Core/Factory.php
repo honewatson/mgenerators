@@ -1,6 +1,6 @@
 <?php
 
-class Generators_Generator_Factory {
+class Generators_Generator_Core_Factory {
 
 	/**
 	 * @var string
