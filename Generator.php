@@ -22,7 +22,8 @@ class Generators_Generator extends Generators_Abstract
 Usage:  php -f generator.php -- [options]
 
   --class <Class>                 Run Class
-
+  --name <Relative Name of new class>
+  php Generator.php --class Generators_Generator_Class --name Magento_Block
   help                          This help
 
   <indexer>     Comma separated indexer codes or value "all" for all indexers
