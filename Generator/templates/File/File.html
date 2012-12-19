@@ -1,0 +1,30 @@
+<?php
+/**
+ *
+ * License:
+ * User:
+ * Date:
+ * Time:
+ *
+ */
+
+class {{  data.namespace  }}_{{  data.classname }} {%  if data.extends  %}extends {{  data.extend  }}{%  endif  %} {
+
+{% for var in vars %}
+
+	/**
+	 *
+	 * @var {{ var }}
+	 */
+	public ${{ var }};
+{% endfor %}
+
+	public function __construct({% for var in vars %} ${{ var }}{%if !loop.last %},{% endif %}{% endfor %}) {
+
+	{% for var in vars %}
+		$this->{{ var }} = ${{ var }};
+	{% endfor %}
+
+	}
+
+}
